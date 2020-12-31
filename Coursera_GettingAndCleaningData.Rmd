@@ -1,0 +1,44 @@
+---
+title: "Coursera_GettingAndCleaningData"
+author: "Xiaonan Xu"
+date: "December 31, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Downloading Files
+
+getwd() and setwd()
+Relative: setwd("./data"), setwd("../")
+Absolute: setwd("/Users/../data")
+
+file.exists("directoryName") will check if the directory exists
+dir.create("directoryName") will create a directory if it does not exist
+```{r}
+
+if(!file.exists("data")) {
+  dir.create("data")  ## if the directory does not exist, create one.
+}
+file.exists("data")
+
+fileUrl <- "http://data.baltimorecity.gov/api/views/dz54-2aru/rows.csv?accessType=DOWNLOAD" ##these three codelines do not work. I download the file and change the file name by hand. But still I keep the codes here for the future correction.
+download.file(fileUrl, destfile = "cameras.csv", method = "curl")
+dataDownload <- date
+
+```
+
+## Reading local flat files
+
+```{r}
+cameraData <- read.table("./data/cameras.csv") ## Error occurs because there si commas separating in the cameraf files. read.table by default look for a tab delimited file.
+
+```
+
+```{r}
+cameraData <- read.table("./data/cameras.csv", sep =",", header = TRUE)
+head(cameraData)
+```
+
